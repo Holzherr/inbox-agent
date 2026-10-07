@@ -68,7 +68,7 @@ After a few days of drafts that look right, set **Auto-send** to `yes`.
 
 - It never deletes, trashes or marks spam. Archived mail is one search away.
 - When unsure, it leaves the email in your inbox.
-- It replies to a pitch once per thread, at most 10 a day, and never to anyone you've emailed before.
+- It replies to a pitch once per thread, at most 10 a day, never to anyone you've emailed before, and never to an auto-reply.
 - Every action goes in `logs/actions.jsonl`, and every run in `logs/run.log`.
 - Each scheduled run uses your Claude plan's usage, like any Claude Code session.
 

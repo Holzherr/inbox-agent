@@ -80,7 +80,7 @@ on behalf of YOUR NAME, YOUR COMPANY
   - Decline, retainer-only, a price list or a booking link → label Cold pitch, archive. No further reply.
   - They accept or want to talk affiliate → keep in inbox, label Cold pitch, flag it in the digest.
 - **I already replied** in the thread (anything from me that isn't the template) → keep, don't auto-reply.
-- **Guards:** never send the template twice in one thread. At most **Max pitch replies per day** (count today's `replied` + `drafted` in the log); past that, label + archive without replying and mention it in the digest. Never reply to my own domain, to anyone I've emailed before, or to mail sent to a group address (hello@, support@, team@).
+- **Guards:** never send the template twice in one thread. At most **Max pitch replies per day** (count today's `replied` + `drafted` in the log); past that, label + archive without replying and mention it in the digest. Never reply to my own domain, to anyone I've emailed before, or to mail sent to a group address (hello@, support@, team@). Never reply to an automated message - an out-of-office, a `noreply@` sender, or one with an `Auto-Submitted` or `X-Autoreply` header - so two bots never answer each other.
 
 ## Digest (`--digest`)
 
