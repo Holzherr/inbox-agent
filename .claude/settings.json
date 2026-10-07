@@ -15,7 +15,12 @@
       "Edit(logs/**)",
       "Write(logs/**)",
       "Edit(.claude/commands/email-triage.md)",
-      "WebSearch"
+      "WebSearch",
+      "mcp__claude_ai_Gmail__list_drafts",
+      "mcp__claude_ai_Gmail__send_message",
+      "mcp__claude_ai_Slack__slack_read_thread",
+      "WebFetch",
+      "Agent"
     ]
   }
 }

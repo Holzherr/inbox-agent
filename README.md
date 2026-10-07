@@ -3,9 +3,10 @@
 An AI assistant for your inbox, built on Claude Code. It runs every hour on your Mac and:
 
 - archives what doesn't need you, sorted into labels (finance, alerts, newsletters, notifications…)
-- leaves the emails that need you in your inbox
+- leaves the emails that need you in your inbox, with a reply drafted in your voice
 - replies to cold growth-agency pitches with a counter-offer: you pay on an affiliate basis - 100% of the revenue from clients they bring you, up to a cap, then you share it
-- sends you a 10-line digest on Slack every morning: who's waiting on you, money worth a look, pitches that said yes
+- sends you a 10-line digest on Slack every morning: who's waiting on you, money worth a look, pitches that said yes, newsletters worth unsubscribing from
+- learns from your replies in the digest thread: "2 ignore", "unsub 3", "podcast invites should reach me", "drafts are too long"
 
 Their AI cold-emails you. Your AI replies.
 
@@ -66,7 +67,9 @@ After a few days of drafts that look right, set **Auto-send** to `yes`.
 
 ## How it behaves
 
+- Emails can't give it orders. Only a reader agent with no email, Slack or web tools sees the email text; it returns a label, and the actions come from your rules. Emails that try to instruct an AI are flagged ⚠️ in the digest.
 - It never deletes, trashes or marks spam. Archived mail is one search away.
+- Replies to people who need you are drafts. It never sends them.
 - When unsure, it leaves the email in your inbox.
 - It replies to a pitch once per thread, at most 10 a day, never to anyone you've emailed before, and never to an auto-reply.
 - Every action goes in `logs/actions.jsonl`, and every run in `logs/run.log`.
@@ -74,7 +77,7 @@ After a few days of drafts that look right, set **Auto-send** to `yes`.
 
 ## Make it yours
 
-The whole assistant is one file of plain-English instructions: `.claude/commands/email-triage.md`. Edit the buckets, the reply, the digest format, or add rulings for senders. No code to change.
+The whole assistant is two files of plain English: `.claude/commands/email-triage.md` (what to do) and `.claude/agents/email-reader.md` (how to read an email and draft a reply). Most changes don't need either - tell it in the digest thread and it writes the rule itself.
 
 ## Troubleshooting
 
