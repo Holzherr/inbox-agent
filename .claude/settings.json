@@ -2,8 +2,6 @@
   "permissions": {
     "allow": [
       "mcp__claude_ai_Gmail__search_threads",
-      "mcp__claude_ai_Gmail__get_thread",
-      "mcp__claude_ai_Gmail__get_message",
       "mcp__claude_ai_Gmail__list_labels",
       "mcp__claude_ai_Gmail__create_label",
       "mcp__claude_ai_Gmail__label_thread",
@@ -15,12 +13,47 @@
       "Edit(logs/**)",
       "Write(logs/**)",
       "Edit(.claude/commands/email-triage.md)",
+      "Read(.claude/templates/**)",
       "WebSearch",
       "mcp__claude_ai_Gmail__list_drafts",
       "mcp__claude_ai_Gmail__send_message",
       "mcp__claude_ai_Slack__slack_read_thread",
-      "WebFetch",
       "Agent"
+    ],
+    "deny": [
+      "mcp__claude_ai_Gmail__trash_message",
+      "mcp__claude_ai_Gmail__trash_thread",
+      "mcp__claude_ai_Gmail__mark_message_spam",
+      "mcp__claude_ai_Gmail__mark_thread_spam",
+      "mcp__claude_ai_Gmail__delete_draft",
+      "mcp__claude_ai_Gmail__delete_label",
+      "mcp__claude_ai_Gmail__forward",
+      "WebFetch",
+      "mcp__claude_ai_Gmail__get_message",
+      "Edit(.claude/templates/**)",
+      "Write(.claude/templates/**)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp__claude_ai_Gmail__get_thread",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard-read.py\""
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__claude_ai_Gmail__reply|mcp__claude_ai_Gmail__send_message",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard-send.py\""
+          }
+        ]
+      }
     ]
   }
 }

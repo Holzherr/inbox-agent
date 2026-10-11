@@ -28,7 +28,7 @@ cd inbox-agent
 
 **2. Tell it about you**
 
-Open `.claude/commands/email-triage.md` and fill in **About me**: your name, email, company, and Slack member ID. Change the reply text under **Cold pitches** if you want different wording.
+Open `.claude/commands/email-triage.md` and fill in **About me**: your name, email, company, and Slack member ID. Then fill in your name and company in the pitch reply, `.claude/templates/affiliate-reply.txt`, and change its wording if you like - edit it by hand, the agent isn't allowed to.
 
 Leave **Auto-send** at `no` for now. Replies are saved as Gmail drafts, so you can read what it would have sent.
 
@@ -67,7 +67,7 @@ After a few days of drafts that look right, set **Auto-send** to `yes`.
 
 ## How it behaves
 
-- Emails can't give it orders. Only a reader agent with no email, Slack or web tools sees the email text; it returns a label, and the actions come from your rules. Emails that try to instruct an AI are flagged ⚠️ in the digest.
+- Emails can't give it orders. Only a reader agent with one read-only tool sees the email text (`.claude/hooks/guard-read.py` blocks `get_thread` for everyone else); it returns a label, and the actions come from your rules. A hook (`.claude/hooks/guard-send.py`) blocks any send that isn't the pitch template in `.claude/templates/affiliate-reply.txt` (which the agent can't edit) or an empty unsubscribe email, and trash/spam/forward/web fetch are denied in `.claude/settings.json`. Emails that try to instruct an AI are flagged ⚠️ in the digest.
 - It never deletes, trashes or marks spam. Archived mail is one search away.
 - Replies to people who need you are drafts. It never sends them.
 - When unsure, it leaves the email in your inbox.
@@ -77,7 +77,7 @@ After a few days of drafts that look right, set **Auto-send** to `yes`.
 
 ## Make it yours
 
-The whole assistant is two files of plain English: `.claude/commands/email-triage.md` (what to do) and `.claude/agents/email-reader.md` (how to read an email and draft a reply). Most changes don't need either - tell it in the digest thread and it writes the rule itself.
+The whole assistant is two files of plain English: `.claude/commands/email-triage.md` (what to do) and `.claude/agents/email-reader.md` (how to read an email and draft a reply). Most changes don't need either - tell it in the digest thread and it writes the rule itself. After changing a hook or `.claude/settings.json`, run `python3 -m unittest discover tests`.
 
 ## Build it yourself instead
 
