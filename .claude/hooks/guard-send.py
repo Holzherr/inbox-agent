@@ -5,25 +5,25 @@ The model reading this inbox can be talked into things by an email. This hook
 can't: it lets a send through only when it matches what the command allows.
 
 - reply: plain text, to the thread's sender only, body exactly the affiliate
-  template in .claude/commands/email-triage.md.
+  template in .claude/templates/affiliate-reply.txt (Edit/Write denied in
+  settings, so the agent can't rewrite what this hook trusts).
 - send_message: an empty "unsubscribe" email to one address, nothing else.
 
 Exit 2 blocks the tool call and shows the reason to the model.
 """
 import json
 import os
-import re
 import sys
 
 ROOT = os.environ.get("CLAUDE_PROJECT_DIR") or os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-COMMAND = os.path.join(ROOT, ".claude", "commands", "email-triage.md")
+TEMPLATE = os.path.join(ROOT, ".claude", "templates", "affiliate-reply.txt")
 
 
 def template():
-    text = open(COMMAND, encoding="utf-8").read()
-    section = text.split("## Cold pitches", 1)[1]
-    m = re.search(r"```\n(.*?)```", section, re.S)
-    return m.group(1)
+    text = norm(open(TEMPLATE, encoding="utf-8").read())
+    if not text:
+        raise ValueError("affiliate template is empty")
+    return text
 
 
 def norm(s):
