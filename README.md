@@ -67,7 +67,7 @@ After a few days of drafts that look right, set **Auto-send** to `yes`.
 
 ## How it behaves
 
-- Emails can't give it orders. Only a reader agent with no email, Slack or web tools sees the email text; it returns a label, and the actions come from your rules. Emails that try to instruct an AI are flagged ⚠️ in the digest.
+- Emails can't give it orders. Only a reader agent with one read-only tool sees the email text; it returns a label, and the actions come from your rules. A hook (`.claude/hooks/guard-send.py`) blocks any send that isn't the pitch template or an empty unsubscribe email, and trash/spam/forward/web fetch are denied in `.claude/settings.json`. Emails that try to instruct an AI are flagged ⚠️ in the digest.
 - It never deletes, trashes or marks spam. Archived mail is one search away.
 - Replies to people who need you are drafts. It never sends them.
 - When unsure, it leaves the email in your inbox.
